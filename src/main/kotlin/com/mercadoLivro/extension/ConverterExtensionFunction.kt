@@ -2,6 +2,7 @@ package com.mercadoLivro.extension
 
 import com.mercadoLivro.controller.request.PostBookRequest
 import com.mercadoLivro.controller.request.PostCustomerRequest
+import com.mercadoLivro.controller.request.PutBookRequest
 import com.mercadoLivro.controller.request.PutCustomerRequest
 import com.mercadoLivro.enums.BookStatus
 import com.mercadoLivro.model.BookModel
@@ -23,3 +24,12 @@ fun PostBookRequest.toBookModel(customer: CustomerModel): BookModel {
         customer = customer
     )
 }
+    fun PutBookRequest.toBookModel(previousValue: BookModel): BookModel {
+        return BookModel(
+            id = previousValue.id,
+            name = this.name ?: previousValue.name,
+            price = this.price ?: previousValue.price,
+            status = previousValue.status,
+            customer = previousValue.customer
+        )
+    }
